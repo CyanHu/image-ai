@@ -4,7 +4,7 @@ import * as React from "react";
 import { useEditor } from "@/components/Editor/use-editor";
 import { fabric } from "fabric";
 import Navbar from "./Navbar";
-import Sidebar from "./Siderbar";
+import Sidebar from "./Sidebar";
 import Toolbar from "./Toolbar";
 import Footer from "./Footer";
 import { ActiveTool } from "./types";
