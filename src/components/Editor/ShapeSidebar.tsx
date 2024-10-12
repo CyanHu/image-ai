@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ActiveTool } from "./types";
+import ToolSidebarHeader from "./ToolSidebarHeader";
 
 interface ShapeSidebarProps {
   activeTool: ActiveTool;
@@ -17,7 +18,7 @@ const ShapeSidebar = ({
         activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
-      shapes sidebar
+      <ToolSidebarHeader title="shapes" description="Add shapes to canvas" />
     </aside>
   );
 };
