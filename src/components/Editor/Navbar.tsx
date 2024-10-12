@@ -17,8 +17,15 @@ import {
 } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
+import { ActiveTool } from "./types";
+import { cn } from "@/lib/utils";
 
-const Navbar = () => {
+interface NavbarProps {
+  activeTool: ActiveTool;
+  onChangeActiveTool: (tool: ActiveTool) => void;
+}
+
+const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
   return (
     <nav className="h-[68px] flex items-center w-full border-b gap-x-8 lg:pl-[34px] p-4">
       <Logo />
@@ -44,7 +51,12 @@ const Navbar = () => {
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
         <Hint label="Select" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onChangeActiveTool("select")}
+            className={cn(activeTool === "select" && "bg-gray-100")}
+          >
             <MousePointerClick className="size-4" />
           </Button>
         </Hint>

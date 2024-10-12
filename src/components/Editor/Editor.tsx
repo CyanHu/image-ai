@@ -7,8 +7,22 @@ import Navbar from "./Navbar";
 import Sidebar from "./Siderbar";
 import Toolbar from "./Toolbar";
 import Footer from "./Footer";
+import { ActiveTool } from "./types";
 
 function Editor() {
+  const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
+
+  const onChangeActiveTool = React.useCallback(
+    (tool: ActiveTool) => {
+      if (tool === activeTool) {
+        return setActiveTool("select");
+      }
+
+      setActiveTool(tool);
+    },
+    [activeTool]
+  );
+
   const { init } = useEditor();
 
   const canvasRef = React.useRef(null);
@@ -29,9 +43,12 @@ function Editor() {
 
   return (
     <div className="h-full flex flex-col">
-      <Navbar />
+      <Navbar activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
       <div className="absolute h-[calc(100%-68px)] w-full top-[68px] flex">
-        <Sidebar />
+        <Sidebar
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
         <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
           <Toolbar />
           <div
