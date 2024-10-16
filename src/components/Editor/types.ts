@@ -61,10 +61,10 @@ export type Editor = {
   addInverseTriangle: () => void;
   addDiamond: () => void;
   canvas: fabric.Canvas;
-  fillColor: string;
   strokeColor: string;
   strokeWidth: number;
   selectedObjects: fabric.Object[];
+  getActiveFillColor: () => string;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";
