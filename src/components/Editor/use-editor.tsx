@@ -6,11 +6,24 @@ import {
   CIRCLE_OPTIONS,
   DIAMOND_OPTIONS,
   Editor,
+  FILL_COLOR,
   RECTANGLE_OPTIONS,
+  STROKE_COLOR,
+  STROKE_WIDTH,
   TRIANGLE_OPTIONS,
 } from "./types";
+import { useCanvasEvents } from "./use-canvas-events";
+import { isTextType } from "./Editor.helper";
 
-const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
+const buildEditor = ({
+  canvas,
+  fillColor,
+  setFillColor,
+  strokeColor,
+  setStrokeColor,
+  strokeWidth,
+  setStrokeWidth,
+}: BuildEditorProps): Editor => {
   const getWorkspace = () => {
     return canvas.getObjects().find((object) => object.name === "clip");
   };
@@ -32,6 +45,29 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
   };
 
   return {
+    changeFillColor: (value: string) => {
+      setFillColor(value);
+      canvas.getActiveObjects().forEach((object) => {
+        object.set({ fill: value });
+      });
+    },
+    changeStrokeWidth: (value: number) => {
+      setStrokeWidth(value);
+      canvas.getActiveObjects().forEach((object) => {
+        object.set({ strokeWidth: value });
+      });
+    },
+    changeStrokeColor: (value: string) => {
+      setStrokeColor(value);
+      canvas.getActiveObjects().forEach((object) => {
+        //Text types没有stroke
+        if (isTextType(object.type)) {
+          object.set({ fill: value });
+          return;
+        }
+        object.set({ stroke: value });
+      });
+    },
     addCircle: () => {
       const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
       addToCanvas(object);
@@ -82,24 +118,48 @@ const buildEditor = ({ canvas }: BuildEditorProps): Editor => {
       );
       addToCanvas(object);
     },
+    fillColor,
+    strokeColor,
+    strokeWidth,
   };
 };
 
 export const useEditor = () => {
   const [canvas, setCanvas] = React.useState<fabric.Canvas | null>(null);
   const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
+  const [_selectedObjects, setSelectedObjects] = React.useState<
+    fabric.Object[]
+  >([]);
+
+  const [fillColor, setFillColor] = React.useState(FILL_COLOR);
+  const [strokeColor, setStrokeColor] = React.useState(STROKE_COLOR);
+  const [strokeWidth, setStrokeWidth] = React.useState(STROKE_WIDTH);
+
   useAutoResize({
     canvas,
     container,
   });
 
+  useCanvasEvents({
+    canvas,
+    setSelectedObjects,
+  });
+
   const editor = React.useMemo(() => {
     if (canvas) {
-      return buildEditor({ canvas });
+      return buildEditor({
+        canvas,
+        fillColor,
+        strokeWidth,
+        strokeColor,
+        setFillColor,
+        setStrokeColor,
+        setStrokeWidth,
+      });
     }
 
     return undefined;
-  }, [canvas]);
+  }, [canvas, fillColor, strokeWidth, strokeColor]);
 
   const init = React.useCallback(
     ({

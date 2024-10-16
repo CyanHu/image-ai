@@ -18,15 +18,27 @@ export type ActiveTool =
 
 export type BuildEditorProps = {
   canvas: fabric.Canvas;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+  setFillColor: (value: string) => void;
+  setStrokeColor: (value: string) => void;
+  setStrokeWidth: (value: number) => void;
 };
 
 export type Editor = {
+  changeFillColor: (value: string) => void;
+  changeStrokeWidth: (value: number) => void;
+  changeStrokeColor: (value: string) => void;
   addCircle: () => void;
   addSoftRectangle: () => void;
   addRectangle: () => void;
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";
