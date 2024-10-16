@@ -6,6 +6,7 @@ import {
   CIRCLE_OPTIONS,
   DIAMOND_OPTIONS,
   Editor,
+  EditorHookProps,
   FILL_COLOR,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
@@ -164,7 +165,7 @@ const buildEditor = ({
   };
 };
 
-export const useEditor = () => {
+export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [canvas, setCanvas] = React.useState<fabric.Canvas | null>(null);
   const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = React.useState<fabric.Object[]>(
@@ -183,6 +184,7 @@ export const useEditor = () => {
   useCanvasEvents({
     canvas,
     setSelectedObjects,
+    clearSelectionCallback,
   });
 
   const editor = React.useMemo(() => {
