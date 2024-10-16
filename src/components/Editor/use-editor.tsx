@@ -23,6 +23,7 @@ const buildEditor = ({
   setStrokeColor,
   strokeWidth,
   setStrokeWidth,
+  selectedObjects,
 }: BuildEditorProps): Editor => {
   const getWorkspace = () => {
     return canvas.getObjects().find((object) => object.name === "clip");
@@ -50,12 +51,14 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         object.set({ fill: value });
       });
+      canvas.renderAll();
     },
     changeStrokeWidth: (value: number) => {
       setStrokeWidth(value);
       canvas.getActiveObjects().forEach((object) => {
         object.set({ strokeWidth: value });
       });
+      canvas.renderAll();
     },
     changeStrokeColor: (value: string) => {
       setStrokeColor(value);
@@ -67,21 +70,44 @@ const buildEditor = ({
         }
         object.set({ stroke: value });
       });
+      canvas.renderAll();
     },
     addCircle: () => {
-      const object = new fabric.Circle({ ...CIRCLE_OPTIONS });
+      const object = new fabric.Circle({
+        ...CIRCLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+      });
       addToCanvas(object);
     },
     addSoftRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS, rx: 50, ry: 50 });
+      const object = new fabric.Rect({
+        ...RECTANGLE_OPTIONS,
+        rx: 50,
+        ry: 50,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+      });
       addToCanvas(object);
     },
     addRectangle: () => {
-      const object = new fabric.Rect({ ...RECTANGLE_OPTIONS });
+      const object = new fabric.Rect({
+        ...RECTANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+      });
       addToCanvas(object);
     },
     addTriangle: () => {
-      const object = new fabric.Triangle({ ...TRIANGLE_OPTIONS });
+      const object = new fabric.Triangle({
+        ...TRIANGLE_OPTIONS,
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+      });
       addToCanvas(object);
     },
     addInverseTriangle: () => {
@@ -96,6 +122,9 @@ const buildEditor = ({
         ],
         {
           ...TRIANGLE_OPTIONS,
+          fill: fillColor,
+          stroke: strokeColor,
+          strokeWidth: strokeWidth,
         }
       );
 
@@ -122,15 +151,16 @@ const buildEditor = ({
     fillColor,
     strokeColor,
     strokeWidth,
+    selectedObjects,
   };
 };
 
 export const useEditor = () => {
   const [canvas, setCanvas] = React.useState<fabric.Canvas | null>(null);
   const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
-  const [_selectedObjects, setSelectedObjects] = React.useState<
-    fabric.Object[]
-  >([]);
+  const [selectedObjects, setSelectedObjects] = React.useState<fabric.Object[]>(
+    []
+  );
 
   const [fillColor, setFillColor] = React.useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = React.useState(STROKE_COLOR);
@@ -156,11 +186,12 @@ export const useEditor = () => {
         setFillColor,
         setStrokeColor,
         setStrokeWidth,
+        selectedObjects,
       });
     }
 
     return undefined;
-  }, [canvas, fillColor, strokeWidth, strokeColor]);
+  }, [canvas, fillColor, strokeWidth, strokeColor, selectedObjects]);
 
   const init = React.useCallback(
     ({

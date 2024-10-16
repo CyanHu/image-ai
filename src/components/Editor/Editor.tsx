@@ -9,6 +9,7 @@ import Toolbar from "./Toolbar";
 import Footer from "./Footer";
 import { ActiveTool } from "./types";
 import ShapeSidebar from "./ShapeSidebar";
+import FillColorSidebar from "./FillColorSidebar";
 
 function Editor() {
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
@@ -51,6 +52,11 @@ function Editor() {
           onChangeActiveTool={onChangeActiveTool}
         />
         <ShapeSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <FillColorSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
