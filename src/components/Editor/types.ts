@@ -79,6 +79,7 @@ export type Editor = {
   strokeWidth: number;
   selectedObjects: fabric.Object[];
   getActiveFillColor: () => string;
+  getActiveStrokeColor: () => string;
 };
 
 export const FILL_COLOR = "rgba(0,0,0,1)";
