@@ -36,6 +36,7 @@ export type Editor = {
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  canvas: fabric.Canvas;
   fillColor: string;
   strokeColor: string;
   strokeWidth: number;
