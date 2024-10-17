@@ -8,6 +8,7 @@ import {
   Editor,
   EditorHookProps,
   FILL_COLOR,
+  FONT_FAMILY,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -30,6 +31,8 @@ const buildEditor = ({
   selectedObjects,
   strokeDashArray,
   setStrokeDashArray,
+  fontFamily,
+  setFontFamily,
 }: BuildEditorProps): Editor => {
   const getWorkspace = () => {
     return canvas.getObjects().find((object) => object.name === "clip");
@@ -98,6 +101,17 @@ const buildEditor = ({
       setFillColor(value);
       canvas.getActiveObjects().forEach((object) => {
         object.set({ fill: value });
+      });
+      canvas.renderAll();
+    },
+    changeFontFamily: (value: string) => {
+      setFontFamily(value);
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // fontFamily存在
+          object.set({ fontFamily: value });
+        }
       });
       canvas.renderAll();
     },
@@ -248,6 +262,18 @@ const buildEditor = ({
 
       return value;
     },
+    getActiveFontFamily: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return fontFamily;
+      }
+
+      // @ts-ignore
+      // fontFaimly存在
+      const value = selectedObject.get("fontFamily") || fontFamily;
+
+      return value;
+    },
 
     canvas,
     selectedObjects,
@@ -261,6 +287,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     []
   );
 
+  const [fontFamily, setFontFamily] = React.useState(FONT_FAMILY);
   const [fillColor, setFillColor] = React.useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = React.useState(STROKE_COLOR);
   const [strokeWidth, setStrokeWidth] = React.useState(STROKE_WIDTH);
@@ -286,10 +313,12 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         strokeWidth,
         strokeColor,
         strokeDashArray,
+        fontFamily,
         setFillColor,
         setStrokeColor,
         setStrokeWidth,
         setStrokeDashArray,
+        setFontFamily,
         selectedObjects,
       });
     }
@@ -302,6 +331,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     strokeColor,
     selectedObjects,
     strokeDashArray,
+    fontFamily,
   ]);
 
   const init = React.useCallback(

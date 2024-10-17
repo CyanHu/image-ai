@@ -4,7 +4,7 @@ import Hint from "./Hint";
 import { ActiveTool, Editor } from "./types";
 import * as React from "react";
 import { BsBorderWidth } from "react-icons/bs";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown } from "lucide-react";
 import { RxTransparencyGrid } from "react-icons/rx";
 import { isTextType } from "./Editor.helper";
 
@@ -17,6 +17,7 @@ interface ToolbarProps {
 const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
   const fillColor = editor?.getActiveFillColor();
   const strokeColor = editor?.getActiveStrokeColor();
+  const fontFamily = editor?.getActiveFontFamily();
 
   const selectedObjectType = editor?.selectedObjects[0]?.type;
   const isText = isTextType(selectedObjectType);
@@ -68,7 +69,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="stroke options" side="bottom" sideOffset={5}>
+          <Hint label="stroke width" side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-width")}
               size="icon"
@@ -76,6 +77,24 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
               className={cn(activeTool === "stroke-width" && "bg-gray-100")}
             >
               <BsBorderWidth className="size-4" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="font family" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("font")}
+              size="icon"
+              variant="ghost"
+              className={cn(
+                "w-auto px-2 text-sm",
+                activeTool === "font" && "bg-gray-100"
+              )}
+            >
+              <div className="max-w-[100px] truncate">{fontFamily}</div>
+              <ChevronDown className="size-4" />
             </Button>
           </Hint>
         </div>
