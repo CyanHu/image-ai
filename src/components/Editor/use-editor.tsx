@@ -70,7 +70,7 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         canvas.bringForward(object);
       });
-      canvas.renderAll;
+      canvas.renderAll();
 
       const workspace = getWorkspace();
       workspace?.sendToBack();
@@ -79,7 +79,7 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         canvas.sendBackwards(object);
       });
-      canvas.renderAll;
+      canvas.renderAll();
 
       const workspace = getWorkspace();
       workspace?.sendToBack();
