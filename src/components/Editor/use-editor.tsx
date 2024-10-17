@@ -12,10 +12,12 @@ import {
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
   STROKE_WIDTH,
+  TEXT_OPTIONS,
   TRIANGLE_OPTIONS,
 } from "./types";
 import { useCanvasEvents } from "./use-canvas-events";
 import { isTextType } from "./Editor.helper";
+import { ITextOptions } from "fabric/fabric-impl";
 
 const buildEditor = ({
   canvas,
@@ -50,6 +52,14 @@ const buildEditor = ({
   };
 
   return {
+    addText: (value: string, options: ITextOptions) => {
+      const object = new fabric.Text(value, {
+        ...TEXT_OPTIONS,
+        fill: fillColor,
+        ...options,
+      });
+      addToCanvas(object);
+    },
     getActiveOpacity: () => {
       const selectedObject = selectedObjects[0];
       if (!selectedObject) {

@@ -13,6 +13,7 @@ import FillColorSidebar from "./FillColorSidebar";
 import StrokeColorSidebar from "./StrokeColorSidebar";
 import StrokeWidthSidebar from "./StrokeWidthSidebar";
 import OpacitySidebar from "./OpacitySidebar";
+import TextSidebar from "./TextSidebar";
 
 function Editor() {
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
@@ -83,6 +84,11 @@ function Editor() {
           onChangeActiveTool={onChangeActiveTool}
         />
         <OpacitySidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <TextSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
