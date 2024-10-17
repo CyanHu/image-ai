@@ -52,7 +52,7 @@ const buildEditor = ({
   };
 
   return {
-    addText: (value: string, options: ITextOptions) => {
+    addText: (value: string, options?: ITextOptions) => {
       const object = new fabric.Text(value, {
         ...TEXT_OPTIONS,
         fill: fillColor,
