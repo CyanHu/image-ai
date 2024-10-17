@@ -4,6 +4,7 @@ import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { Slider } from "../ui/slider";
+import * as React from "react";
 
 interface OpacitySidebarProps {
   editor: Editor | undefined;
@@ -16,13 +17,23 @@ const OpacitySidebar = ({
   activeTool,
   onChangeActiveTool,
 }: OpacitySidebarProps) => {
-  const value = editor?.getActiveOpacity() || 1;
+  const initialValue = editor?.getActiveOpacity() || 1;
+
+  const [opacity, setOpacity] = React.useState(initialValue);
+
+  React.useEffect(() => {
+    if (editor?.selectedObjects) {
+      setOpacity(editor.selectedObjects[0]?.get("opacity") || 1);
+    }
+  }, [editor?.selectedObjects]);
+
   const onClose = () => {
     onChangeActiveTool("select");
   };
 
   const onChange = (value: number) => {
     editor?.changeOpacity(value);
+    setOpacity(value);
   };
 
   return (
@@ -39,7 +50,7 @@ const OpacitySidebar = ({
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">
           <Slider
-            value={[value]}
+            value={[opacity]}
             onValueChange={(values) => onChange(values[0])}
             max={1}
             min={0}
