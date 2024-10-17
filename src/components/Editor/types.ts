@@ -67,6 +67,8 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  bringForward: () => void;
+  sendBackwards: () => void;
   changeFillColor: (value: string) => void;
   changeStrokeWidth: (value: number) => void;
   changeStrokeColor: (value: string) => void;
