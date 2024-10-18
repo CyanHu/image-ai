@@ -7,7 +7,7 @@ import { BsBorderWidth } from "react-icons/bs";
 import { ArrowDown, ArrowUp, ChevronDown } from "lucide-react";
 import { RxTransparencyGrid } from "react-icons/rx";
 import { isTextType } from "./Editor.helper";
-import { FaBold } from "react-icons/fa6";
+import { FaBold, FaItalic } from "react-icons/fa6";
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -16,20 +16,25 @@ interface ToolbarProps {
 }
 
 const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
-  const fillColor = editor?.getActiveFillColor();
-  const strokeColor = editor?.getActiveStrokeColor();
-  const fontFamily = editor?.getActiveFontFamily();
+  const initialFillColor = editor?.getActiveFillColor();
+  const initialStrokeColor = editor?.getActiveStrokeColor();
+  const initialFontFamily = editor?.getActiveFontFamily();
   const initialFontWeight = editor?.getActiveFontWeight() || FONT_WEIGHT;
+  const initialFontStyle = editor?.getActiveFontStyle();
 
   const [properties, setProperties] = React.useState({
     fontWeight: initialFontWeight,
+    fillColor: initialFillColor,
+    strokeColor: initialStrokeColor,
+    fontFamily: initialFontFamily,
+    fontStyle: initialFontStyle,
   });
 
+  const selectedObject = editor?.selectedObjects[0];
   const selectedObjectType = editor?.selectedObjects[0]?.type;
   const isText = isTextType(selectedObjectType);
 
   const toggleBold = () => {
-    const selectedObject = editor?.selectedObjects[0];
     if (!selectedObject) {
       return;
     }
@@ -39,6 +44,18 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
     setProperties((current) => ({
       ...current,
       fontWeight: newValue,
+    }));
+  };
+  const toggleItalic = () => {
+    if (!selectedObject) {
+      return;
+    }
+    const newValue = properties.fontStyle === "italic" ? "normal" : "italic";
+
+    editor?.changeFontStyle(newValue);
+    setProperties((current) => ({
+      ...current,
+      fontStyle: newValue,
     }));
   };
 
@@ -61,7 +78,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
             <div
               className="rounded-sm size-4 border"
               style={{
-                backgroundColor: fillColor,
+                backgroundColor: properties.fillColor,
               }}
             ></div>
           </Button>
@@ -79,7 +96,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
               <div
                 className="rounded-sm size-4 border-2 bg-white"
                 style={{
-                  borderColor: strokeColor,
+                  borderColor: properties.strokeColor,
                 }}
               ></div>
             </Button>
@@ -113,7 +130,9 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
                 activeTool === "font" && "bg-gray-100"
               )}
             >
-              <div className="max-w-[100px] truncate">{fontFamily}</div>
+              <div className="max-w-[100px] truncate">
+                {properties.fontFamily}
+              </div>
               <ChevronDown className="size-4" />
             </Button>
           </Hint>
@@ -130,6 +149,20 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
               className={cn(properties.fontWeight > 500 && "bg-gray-100")}
             >
               <FaBold className="size-4" />
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="Italic" side="bottom" sideOffset={5}>
+            <Button
+              onClick={() => toggleItalic()}
+              size="icon"
+              variant="ghost"
+              className={cn(properties.fontStyle === "italic" && "bg-gray-100")}
+            >
+              <FaItalic className="size-4" />
             </Button>
           </Hint>
         </div>

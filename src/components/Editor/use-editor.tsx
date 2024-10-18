@@ -45,7 +45,7 @@ const buildEditor = ({
 
     if (!center) return;
 
-    // @ts-ignore
+    // @ts-expect-error: _centerObject函数存在
     canvas._centerObject(object, center);
   };
 
@@ -83,9 +83,18 @@ const buildEditor = ({
     changeFontWeight: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
         if (isTextType(object.type)) {
-          // @ts-ignore
-          // fontWeight存在
+          // @ts-expect-error: fontWeight存在
+
           object.set({ fontWeight: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontStyle: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error: fontStyle存在
+          object.set({ fontStyle: value });
         }
       });
       canvas.renderAll();
@@ -119,8 +128,7 @@ const buildEditor = ({
       setFontFamily(value);
       canvas.getActiveObjects().forEach((object) => {
         if (isTextType(object.type)) {
-          // @ts-ignore
-          // fontFamily存在
+          // @ts-expect-error: fontFamily存在
           object.set({ fontFamily: value });
         }
       });
@@ -279,8 +287,7 @@ const buildEditor = ({
         return fontFamily;
       }
 
-      // @ts-ignore
-      // fontFaimly存在
+      // @ts-expect-error: fontFaimly存在
       const value = selectedObject.get("fontFamily") || fontFamily;
 
       return value;
@@ -291,9 +298,19 @@ const buildEditor = ({
         return FONT_WEIGHT;
       }
 
-      // @ts-ignore
-      // fontFaimly存在
+      // @ts-expect-error: fontWeight存在
       const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
+
+      return value;
+    },
+    getActiveFontStyle: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return "normal";
+      }
+
+      // @ts-expect-error: fontStyle存在
+      const value = selectedObject.get("fontStyle") || "normal";
 
       return value;
     },
