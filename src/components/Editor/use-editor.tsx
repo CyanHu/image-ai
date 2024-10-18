@@ -9,6 +9,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_WEIGHT,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -76,6 +77,16 @@ const buildEditor = ({
     changeOpacity: (value: number) => {
       canvas.getActiveObjects().forEach((object) => {
         object.set({ opacity: value });
+      });
+      canvas.renderAll();
+    },
+    changeFontWeight: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-ignore
+          // fontWeight存在
+          object.set({ fontWeight: value });
+        }
       });
       canvas.renderAll();
     },
@@ -271,6 +282,18 @@ const buildEditor = ({
       // @ts-ignore
       // fontFaimly存在
       const value = selectedObject.get("fontFamily") || fontFamily;
+
+      return value;
+    },
+    getActiveFontWeight: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return FONT_WEIGHT;
+      }
+
+      // @ts-ignore
+      // fontFaimly存在
+      const value = selectedObject.get("fontWeight") || FONT_WEIGHT;
 
       return value;
     },
