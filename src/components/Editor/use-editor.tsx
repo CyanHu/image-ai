@@ -99,6 +99,24 @@ const buildEditor = ({
       });
       canvas.renderAll();
     },
+    changeFontUnderline: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error: underline存在
+          object.set({ underline: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontLinethrough: (value: boolean) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error: linethrough存在
+          object.set({ linethrough: value });
+        }
+      });
+      canvas.renderAll();
+    },
     bringForward: () => {
       canvas.getActiveObjects().forEach((object) => {
         canvas.bringForward(object);
@@ -311,6 +329,28 @@ const buildEditor = ({
 
       // @ts-expect-error: fontStyle存在
       const value = selectedObject.get("fontStyle") || "normal";
+
+      return value;
+    },
+    getActiveFontUnderline: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return false;
+      }
+
+      // @ts-expect-error: underline存在
+      const value = selectedObject.get("underline") || false;
+
+      return value;
+    },
+    getActiveFontLinethrough: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return false;
+      }
+
+      // @ts-expect-error: linethrough存在
+      const value = selectedObject.get("linethrough") || false;
 
       return value;
     },

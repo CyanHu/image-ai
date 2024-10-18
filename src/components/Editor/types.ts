@@ -91,6 +91,10 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  changeFontLinethrough: (value: boolean) => void;
+  getActiveFontLinethrough: () => boolean;
+  changeFontUnderline: (value: boolean) => void;
+  getActiveFontUnderline: () => boolean;
   changeFontStyle: (value: string) => void;
   getActiveFontStyle: () => string;
   changeFontWeight: (value: number) => void;
