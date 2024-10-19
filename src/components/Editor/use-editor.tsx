@@ -9,6 +9,7 @@ import {
   EditorHookProps,
   FILL_COLOR,
   FONT_FAMILY,
+  FONT_SIZE,
   FONT_WEIGHT,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
@@ -122,6 +123,15 @@ const buildEditor = ({
         if (isTextType(object.type)) {
           // @ts-expect-error: textAlign存在
           object.set({ textAlign: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeFontSize: (value: number) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error: fontSize存在
+          object.set({ fontSize: value });
         }
       });
       canvas.renderAll();
@@ -371,6 +381,17 @@ const buildEditor = ({
 
       // @ts-expect-error: textAlign存在
       const value = selectedObject.get("textAlign") || "left";
+
+      return value;
+    },
+    getActiveFontSize: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return FONT_SIZE;
+      }
+
+      // @ts-expect-error: textAlign存在
+      const value = selectedObject.get("fontSize") || FONT_SIZE;
 
       return value;
     },
