@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ActiveTool, Editor, FILL_COLOR, STROKE_COLOR } from "./types";
+import { ActiveTool, Editor, STROKE_COLOR } from "./types";
 import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";

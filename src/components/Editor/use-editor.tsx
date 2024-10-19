@@ -57,7 +57,7 @@ const buildEditor = ({
 
   return {
     addText: (value: string, options?: ITextOptions) => {
-      const object = new fabric.Text(value, {
+      const object = new fabric.Textbox(value, {
         ...TEXT_OPTIONS,
         fill: fillColor,
         ...options,
@@ -113,6 +113,15 @@ const buildEditor = ({
         if (isTextType(object.type)) {
           // @ts-expect-error: linethrough存在
           object.set({ linethrough: value });
+        }
+      });
+      canvas.renderAll();
+    },
+    changeTextAlign: (value: string) => {
+      canvas.getActiveObjects().forEach((object) => {
+        if (isTextType(object.type)) {
+          // @ts-expect-error: textAlign存在
+          object.set({ textAlign: value });
         }
       });
       canvas.renderAll();
@@ -354,7 +363,17 @@ const buildEditor = ({
 
       return value;
     },
+    getActiveTextAlign: () => {
+      const selectedObject = selectedObjects[0];
+      if (!selectedObject) {
+        return "left";
+      }
 
+      // @ts-expect-error: textAlign存在
+      const value = selectedObject.get("textAlign") || "left";
+
+      return value;
+    },
     canvas,
     selectedObjects,
   };
