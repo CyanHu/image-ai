@@ -57,6 +57,11 @@ const buildEditor = ({
   };
 
   return {
+    delete: () => {
+      canvas.getActiveObjects().forEach((objcet) => canvas.remove(objcet));
+      canvas.discardActiveObject();
+      canvas.renderAll();
+    },
     addText: (value: string, options?: ITextOptions) => {
       const object = new fabric.Textbox(value, {
         ...TEXT_OPTIONS,
