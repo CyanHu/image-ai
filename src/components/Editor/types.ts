@@ -91,6 +91,7 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  addImage: (value: string) => void;
   delete: () => void;
   changeFontSize: (value: number) => void;
   getActiveFontSize: () => number;
