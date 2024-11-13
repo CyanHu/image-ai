@@ -12,6 +12,32 @@ export const selectionDependentTools = [
   "stroke-width",
 ];
 
+export const filters = [
+  "none",
+  "polaroid",
+  "sepia",
+  "kodachrome",
+  "contrast",
+  "brightness",
+  "greyscale",
+  "brownie",
+  "vintage",
+  "technicolor",
+  "pixelate",
+  "invert",
+  "blur",
+  "sharpen",
+  "emboss",
+  "removecolor",
+  "blacknwhite",
+  "vibrance",
+  "blendcolor",
+  "huerotate",
+  "resize",
+  "saturation",
+  "gamma",
+];
+
 export const fonts = [
   "Arial",
   "Arial Black",
@@ -66,6 +92,7 @@ export type ActiveTool =
   | "stroke-width"
   | "font"
   | "opacity"
+  | "filter"
   | "settings"
   | "ai"
   | "remove-bg"
@@ -91,6 +118,7 @@ export type BuildEditorProps = {
 };
 
 export type Editor = {
+  chnageImageFilter: (value: string) => void;
   addImage: (value: string) => void;
   delete: () => void;
   changeFontSize: (value: number) => void;

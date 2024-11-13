@@ -16,6 +16,7 @@ import OpacitySidebar from "./OpacitySidebar";
 import TextSidebar from "./TextSidebar";
 import FontSidebar from "./FontSidebar";
 import ImageSidebar from "./ImageSidebar";
+import FilterSidebar from "./FilterSidebar";
 
 function Editor() {
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
@@ -101,6 +102,11 @@ function Editor() {
           onChangeActiveTool={onChangeActiveTool}
         />
         <ImageSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <FilterSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

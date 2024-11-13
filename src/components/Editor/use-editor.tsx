@@ -19,7 +19,7 @@ import {
   TRIANGLE_OPTIONS,
 } from "./types";
 import { useCanvasEvents } from "./use-canvas-events";
-import { isTextType } from "./Editor.helper";
+import { createFilter, isTextType } from "./Editor.helper";
 import { ITextOptions } from "fabric/fabric-impl";
 
 const buildEditor = ({
@@ -57,6 +57,20 @@ const buildEditor = ({
   };
 
   return {
+    chnageImageFilter(value) {
+      const objects = canvas.getActiveObjects();
+      objects.forEach((object) => {
+        if (object.type === "image") {
+          const imageObject = object as fabric.Image;
+
+          const effect = createFilter(value);
+
+          imageObject.filters = effect ? [effect] : [];
+          imageObject.applyFilters();
+          canvas.renderAll();
+        }
+      });
+    },
     addImage: (value: string) => {
       fabric.Image.fromURL(
         value,
