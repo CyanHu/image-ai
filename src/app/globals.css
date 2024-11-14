@@ -92,3 +92,14 @@ body {
   border-radius: 0.5rem !important;
   overflow: hidden !important;
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
