@@ -60,6 +60,14 @@ const buildEditor = ({
   };
 
   return {
+    enableDrawingMode: () => {
+      canvas.discardActiveObject();
+      canvas.renderAll();
+      canvas.isDrawingMode = true;
+    },
+    disableDrawingMode: () => {
+      canvas.isDrawingMode = false;
+    },
     onCopy: () => copy(),
     onPaste: () => paste(),
     chnageImageFilter(value) {
@@ -213,6 +221,7 @@ const buildEditor = ({
       canvas.getActiveObjects().forEach((object) => {
         object.set({ strokeWidth: value });
       });
+      canvas.freeDrawingBrush.width = value;
       canvas.renderAll();
     },
     changeStrokeColor: (value: string) => {
@@ -225,6 +234,7 @@ const buildEditor = ({
         }
         object.set({ stroke: value });
       });
+      canvas.freeDrawingBrush.color = value;
       canvas.renderAll();
     },
     changeStrokeDashArray: (value: number[]) => {
