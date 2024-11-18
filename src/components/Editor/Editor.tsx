@@ -155,7 +155,7 @@ function Editor() {
           >
             <canvas ref={canvasRef} />
           </div>
-          <Footer />
+          <Footer editor={editor} />
         </main>
       </div>
     </div>
