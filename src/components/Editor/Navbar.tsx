@@ -17,15 +17,16 @@ import {
 } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
-import { ActiveTool } from "./types";
+import { ActiveTool, Editor } from "./types";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
+  editor: Editor | undefined;
 }
 
-const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
+const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
   return (
     <nav className="h-[68px] flex items-center w-full border-b gap-x-8 lg:pl-[34px] p-4">
       <Logo />
@@ -61,12 +62,22 @@ const Navbar = ({ activeTool, onChangeActiveTool }: NavbarProps) => {
           </Button>
         </Hint>
         <Hint label="Undo" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={editor?.onUndo}
+            disabled={!editor?.canUndo()}
+          >
             <Undo2 className="size-4" />
           </Button>
         </Hint>
         <Hint label="Redo" side="bottom" sideOffset={10}>
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={editor?.onRedo}
+            disabled={!editor?.canRedo()}
+          >
             <Redo2 className="size-4" />
           </Button>
         </Hint>

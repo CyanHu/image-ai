@@ -11,6 +11,7 @@ import {
   FONT_FAMILY,
   FONT_SIZE,
   FONT_WEIGHT,
+  JSON_KEYS,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -22,8 +23,14 @@ import { useCanvasEvents } from "./use-canvas-events";
 import { createFilter, isTextType } from "./Editor.helper";
 import { ITextOptions } from "fabric/fabric-impl";
 import { useClipboard } from "./use-clipboard";
+import { useHistory } from "./use-history";
 
 const buildEditor = ({
+  save,
+  undo,
+  redo,
+  canUndo,
+  canRedo,
   autoZoom,
   copy,
   paste,
@@ -63,6 +70,8 @@ const buildEditor = ({
   return {
     autoZoom,
     getWorkspace,
+    canUndo,
+    canRedo,
     zoomIn: () => {
       let zoomRatio = canvas.getZoom();
       zoomRatio += 0.05;
@@ -85,11 +94,13 @@ const buildEditor = ({
       const workspace = getWorkspace();
       workspace?.set(value);
       autoZoom();
+      save();
     },
     changeBackground: (value: string) => {
       const workspace = getWorkspace();
       workspace?.set({ fill: value });
       canvas.renderAll();
+      save();
     },
     enableDrawingMode: () => {
       canvas.discardActiveObject();
@@ -99,6 +110,8 @@ const buildEditor = ({
     disableDrawingMode: () => {
       canvas.isDrawingMode = false;
     },
+    onUndo: () => undo(),
+    onRedo: () => redo(),
     onCopy: () => copy(),
     onPaste: () => paste(),
     chnageImageFilter(value) {
@@ -492,6 +505,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeDashArray, setStrokeDashArray] =
     React.useState<number[]>(STROKE_DASH_ARRAY);
 
+  const { save, canRedo, canUndo, undo, redo, canvasHistory, setHistoryIndex } =
+    useHistory({ canvas });
   const { copy, paste } = useClipboard({ canvas });
   const { autoZoom } = useAutoResize({
     canvas,
@@ -499,6 +514,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   });
 
   useCanvasEvents({
+    save,
     canvas,
     setSelectedObjects,
     clearSelectionCallback,
@@ -507,6 +523,11 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const editor = React.useMemo(() => {
     if (canvas) {
       return buildEditor({
+        save,
+        undo,
+        redo,
+        canUndo,
+        canRedo,
         autoZoom,
         copy,
         paste,
@@ -527,6 +548,11 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
     return undefined;
   }, [
+    save,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
     autoZoom,
     copy,
     paste,
@@ -578,8 +604,12 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
+
+      const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
+      canvasHistory.current = [currentState];
+      setHistoryIndex(0);
     },
-    []
+    [canvasHistory, setHistoryIndex]
   );
   return { init, editor };
 };
