@@ -19,6 +19,7 @@ import { Separator } from "../ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
 import { ActiveTool, Editor } from "./types";
 import { cn } from "@/lib/utils";
+import { useFilePicker } from "use-file-picker";
 
 interface NavbarProps {
   activeTool: ActiveTool;
@@ -27,6 +28,19 @@ interface NavbarProps {
 }
 
 const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
+  const { openFilePicker } = useFilePicker({
+    accept: ".json",
+    onFilesSuccessfullySelected: ({ plainFiles }: any) => {
+      if (plainFiles && plainFiles.length > 0) {
+        const file = plainFiles[0];
+        const reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = () => {
+          editor?.loadJson(reader.result as string);
+        };
+      }
+    },
+  });
   return (
     <nav className="h-[68px] flex items-center w-full border-b gap-x-8 lg:pl-[34px] p-4">
       <Logo />
@@ -39,7 +53,10 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-60">
-            <DropdownMenuItem className="flex items-center gap-x-2">
+            <DropdownMenuItem
+              className="flex items-center gap-x-2"
+              onClick={() => openFilePicker()}
+            >
               <CiFileOn className="size-8" />
               <div>
                 <p>Open</p>
@@ -96,7 +113,10 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="min-w-60">
-            <DropdownMenuItem className="flex items-center gap-x-2">
+            <DropdownMenuItem
+              className="flex items-center gap-x-2"
+              onClick={() => editor?.saveJson()}
+            >
               <CiFileOn className="size-8" />
               <div>
                 <p>JSON</p>
@@ -105,7 +125,10 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
                 </p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-x-2">
+            <DropdownMenuItem
+              className="flex items-center gap-x-2"
+              onClick={() => editor?.savePng()}
+            >
               <CiFileOn className="size-8" />
               <div>
                 <p>PNG</p>
@@ -114,7 +137,10 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
                 </p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-x-2">
+            <DropdownMenuItem
+              className="flex items-center gap-x-2"
+              onClick={() => editor?.saveJpg()}
+            >
               <CiFileOn className="size-8" />
               <div>
                 <p>JPG</p>
@@ -123,7 +149,10 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
                 </p>
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-x-2">
+            <DropdownMenuItem
+              className="flex items-center gap-x-2"
+              onClick={() => editor?.saveSvg()}
+            >
               <CiFileOn className="size-8" />
               <div>
                 <p>SVG</p>
