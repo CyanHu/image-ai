@@ -30,6 +30,7 @@ import { ITextOptions } from "fabric/fabric-impl";
 import { useClipboard } from "./use-clipboard";
 import { useHistory } from "./use-history";
 import { useHotkeys } from "./use-hotkeys";
+import { useWindowEvents } from "./use-window-events";
 
 const buildEditor = ({
   save,
@@ -577,6 +578,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [strokeWidth, setStrokeWidth] = React.useState(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] =
     React.useState<number[]>(STROKE_DASH_ARRAY);
+
+  useWindowEvents();
 
   const { save, canRedo, canUndo, undo, redo, canvasHistory, setHistoryIndex } =
     useHistory({ canvas });
