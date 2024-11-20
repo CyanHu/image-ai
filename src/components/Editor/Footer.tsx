@@ -1,6 +1,7 @@
 import { Minimize, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "../ui/button";
 import Hint from "./Hint";
+import { Editor } from "./types";
 
 interface FooterProps {
   editor: Editor | undefined;
