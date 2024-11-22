@@ -4,6 +4,7 @@ import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
 interface TextSidebarProps {
   editor: Editor | undefined;
@@ -19,6 +20,7 @@ const TextSidebar = ({
   const onClose = () => {
     onChangeActiveTool("select");
   };
+  const t = useTranslations("Sidebar.text");
 
   return (
     <aside
@@ -27,11 +29,11 @@ const TextSidebar = ({
         activeTool === "text" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader title="Text" description="Add text to your canvas" />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">
           <Button className="w-full" onClick={() => editor?.addText("Textbox")}>
-            Add a textbox
+            {t("addedButton")}
           </Button>
           <Button
             className="w-full h-16"

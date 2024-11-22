@@ -1,0 +1,48 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "Sidebar": {
+    "image": {
+      "title": "Image",
+      "description": "Add images to your canvas",
+      "uploadButton": "Upload Image"
+    },
+    "text": {
+      "title": "Text",
+      "description": "Add text to your canvas",
+      "addedButton": "Add a Textbox"
+    },
+    "shapes": {
+      "title": "Shape",
+      "description": "Add shapes to your canvas"
+    },
+    "draw": {
+      "title": "Draw",
+      "description": "Modify brush settings",
+      "brushWidth": "Brush width"
+    },
+    "AI": {
+      "title": "AI",
+      "description": "Generate an image using AI",
+      "generateButton": "Generate"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Change the look of your workspace",
+      "height": "Height",
+      "width": "Width",
+      "resizeButton": "Resize"
+    }
+  },
+  "SidebarLabel": {
+    "design": "Design",
+    "image": "Image",
+    "text": "Text",
+    "shapes": "Shapes",
+    "draw": "Draw",
+    "ai": "AI",
+    "settings": "Settings"
+  }
+}

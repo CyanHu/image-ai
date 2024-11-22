@@ -7,6 +7,7 @@ import ShapeTool from "./ShapeTool";
 import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
 import { IoTriangle } from "react-icons/io5";
 import { FaDiamond } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 
 interface ShapeSidebarProps {
   editor: Editor | undefined;
@@ -22,6 +23,7 @@ const ShapeSidebar = ({
   const onClose = () => {
     onChangeActiveTool("select");
   };
+  const t = useTranslations("Sidebar.shapes");
 
   return (
     <aside
@@ -30,7 +32,7 @@ const ShapeSidebar = ({
         activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader title="shapes" description="Add shapes to canvas" />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <div className="grid grid-cols-3 gap-4 p-4">
           <ShapeTool onClick={() => editor?.addCircle()} icon={FaCircle} />

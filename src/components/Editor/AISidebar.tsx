@@ -7,6 +7,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useGenerateImage } from "./use-generate-image";
+import { useTranslations } from "next-intl";
 
 interface AISidebarProps {
   editor: Editor | undefined;
@@ -33,6 +34,7 @@ const AISidebar = ({
   const onClose = () => {
     onChangeActiveTool("select");
   };
+  const t = useTranslations("Sidebar.ai");
 
   return (
     <aside
@@ -41,7 +43,7 @@ const AISidebar = ({
         activeTool === "ai" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader title="AI" description="Generate an image using AI" />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <form className="p-4 space-y-6" onSubmit={onSubmit}>
           <Textarea
@@ -59,7 +61,7 @@ const AISidebar = ({
             className="w-full"
             disabled={mutation.isPending}
           >
-            Generate
+            {t("generateButton")}
           </Button>
         </form>
       </ScrollArea>

@@ -9,6 +9,7 @@ import { useGetImages } from "./use-get-images";
 import { AlertTriangle, Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface ImageSidebarProps {
   editor: Editor | undefined;
@@ -25,6 +26,7 @@ const ImageSidebar = ({
   const onClose = () => {
     onChangeActiveTool("select");
   };
+  const t = useTranslations("Sidebar.image");
 
   return (
     <aside
@@ -33,10 +35,7 @@ const ImageSidebar = ({
         activeTool === "images" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader
-        title="Images"
-        description="Add images to your canvas"
-      />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <div className="p-4 border-b">
         <UploadButton
           appearance={{
@@ -44,7 +43,7 @@ const ImageSidebar = ({
             allowedContent: "hidden",
           }}
           content={{
-            button: "Upload Image",
+            button: t("uploadButton"),
           }}
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {

@@ -12,6 +12,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { ColorPicker } from "./ColorPicker";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
+import { useTranslations } from "next-intl";
 
 interface DrawSidebarProps {
   editor: Editor | undefined;
@@ -31,6 +32,8 @@ const DrawSidebar = ({
     onChangeActiveTool("select");
   };
 
+  const t = useTranslations("Sidebar.draw");
+
   const onColorChange = (value: string) => {
     editor?.changeStrokeColor(value);
   };
@@ -45,13 +48,10 @@ const DrawSidebar = ({
         activeTool === "draw" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader
-        title="Draw mode"
-        description="Modify brush settings"
-      />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <div className="p-4 space-y-6">
-          <Label className="text-sm">Brush width</Label>
+          <Label className="text-sm">{t("brushWidth")}</Label>
           <Slider
             value={[widthValue]}
             onValueChange={(values) => onWidthChange(values[0])}

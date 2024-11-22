@@ -1,0 +1,48 @@
+{
+  "HomePage": {
+    "title": "你好!",
+    "about": "前往关于页"
+  },
+  "Sidebar": {
+    "image": {
+      "title": "图片",
+      "description": "在画布上添加图片",
+      "uploadButton": "上传图片"
+    },
+    "text": {
+      "title": "文字",
+      "description": "在画布上添加文字",
+      "addedButton": "添加文字"
+    },
+    "shapes": {
+      "title": "形状",
+      "description": "在画布上添加形状"
+    },
+    "draw": {
+      "title": "画笔",
+      "description": "修改你的笔刷设置",
+      "brushWidth": "笔刷宽度"
+    },
+    "ai": {
+      "title": "AI",
+      "description": "用AI生成图片",
+      "generateButton": "生成"
+    },
+    "settings": {
+      "title": "设置",
+      "description": "改变你的工作空间",
+      "height": "高度",
+      "width": "宽度",
+      "resizeButton": "设置"
+    }
+  },
+  "SidebarLabel": {
+    "design": "设计",
+    "image": "图片",
+    "text": "文字",
+    "shapes": "形状",
+    "draw": "画笔",
+    "ai": "AI",
+    "settings": "设置"
+  }
+}

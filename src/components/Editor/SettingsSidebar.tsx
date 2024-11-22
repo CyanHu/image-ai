@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
 interface SettingsSidebarProps {
   editor: Editor | undefined;
@@ -58,6 +59,8 @@ const SettingsSidebar = ({
     onChangeActiveTool("select");
   };
 
+  const t = useTranslations("Sidebar.settings");
+
   return (
     <aside
       className={cn(
@@ -65,32 +68,29 @@ const SettingsSidebar = ({
         activeTool === "settings" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader
-        title="Settings"
-        description="Change the look of your workspace"
-      />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <form className="space-y-4 p-4" onSubmit={onSubmit}>
           <div className="space-y-2">
-            <Label>Height</Label>
+            <Label>{t("height")}</Label>
             <Input
-              placeholder="Height"
+              placeholder={t("height")}
               value={height}
               type="number"
               onChange={(e) => changeHeight(e.target.value)}
             />
           </div>
           <div className="space-y-2">
-            <Label>Width</Label>
+            <Label>{t("width")}</Label>
             <Input
-              placeholder="Width"
+              placeholder={t("width")}
               value={width}
               type="number"
               onChange={(e) => changeWidth(e.target.value)}
             />
           </div>
           <Button type="submit" className="w-full">
-            Resize
+            {t("resizeButton")}
           </Button>
         </form>
         <div className="p-4">
