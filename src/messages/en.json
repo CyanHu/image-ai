@@ -23,7 +23,7 @@
       "description": "Modify brush settings",
       "brushWidth": "Brush width"
     },
-    "AI": {
+    "ai": {
       "title": "AI",
       "description": "Generate an image using AI",
       "generateButton": "Generate"
