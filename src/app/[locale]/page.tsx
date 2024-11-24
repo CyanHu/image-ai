@@ -32,7 +32,7 @@ export default function Home({
       {/* 导航栏 */}
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
             {t('title')}
           </h1>
           <div className="flex items-center gap-6">
@@ -53,7 +53,7 @@ export default function Home({
       <main className="container mx-auto px-6 py-20">
         <div className="text-center mb-20">
           <h1 className="text-6xl font-bold text-white mb-6">
-            <span className="bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 to-purple-300 bg-clip-text text-transparent [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
               {t('subtitle')}
             </span>
           </h1>
