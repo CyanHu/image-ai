@@ -44,5 +44,37 @@
     "draw": "Draw",
     "ai": "AI",
     "settings": "Settings"
+  },
+  "Index": {
+    "title": "AI Draw",
+    "subtitle": "Intelligent Graphic Design",
+    "description": "A modern graphic editor with AI generation, supporting multi-format creation, professional layout and team collaboration",
+    "startCreating": "Start Creating",
+    "aiDesign": {
+      "title": "AI Enhanced Design",
+      "description": "Intelligent image generation and background removal based on Replicate AI",
+      "features": {
+        "imageGeneration": "Quick Image Generation",
+        "backgroundRemoval": "Auto Background Removal"
+      }
+    },
+    "professionalCanvas": {
+      "title": "Professional Canvas",
+      "description": "Shape editing, multi-layer management, free drawing and real-time preview based on fabric.js",
+      "features": {
+        "history": "Operation History",
+        "autoSave": "Local Auto Save"
+      }
+    },
+    "multiFormat": {
+      "title": "Multi-Format Support",
+      "description": "Support JSON/PNG/SVG/PDF/JPG export and JSON file import",
+      "features": {
+        "i18n": "International Language Support"
+      }
+    },
+    "footer": {
+      "copyright": "© 2024 AI Draw. Version v1.0.0"
+    }
   }
 }

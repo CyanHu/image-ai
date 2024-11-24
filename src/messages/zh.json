@@ -44,5 +44,37 @@
     "draw": "画笔",
     "ai": "AI",
     "settings": "设置"
+  },
+  "Index": {
+    "title": "智画",
+    "subtitle": "智能图形设计",
+    "description": "集成AI智能生成的现代化图形编辑器，支持多格式创作、专业级排版与团队协作",
+    "startCreating": "开始创作",
+    "aiDesign": {
+      "title": "AI增强设计",
+      "description": "智能图像生成/自动抠图，基于Replicate AI接口实现",
+      "features": {
+        "imageGeneration": "快速生成图片",
+        "backgroundRemoval": "自动背景移除"
+      }
+    },
+    "professionalCanvas": {
+      "title": "专业画板",
+      "description": "基于fabric.js实现形状编辑、多层级管理、自由绘图与实时预览",
+      "features": {
+        "history": "操作历史回溯",
+        "autoSave": "本地自动保存"
+      }
+    },
+    "multiFormat": {
+      "title": "多格式支持",
+      "description": "支持JSON/PNG/SVG/PDF/JPG导出，兼容JSON文件导入",
+      "features": {
+        "i18n": "国际化多语言支持"
+      }
+    },
+    "footer": {
+      "copyright": "© 2024 智画. 当前版本 v1.0.0"
+    }
   }
 }
