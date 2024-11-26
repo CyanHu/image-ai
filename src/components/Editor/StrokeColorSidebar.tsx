@@ -4,6 +4,7 @@ import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { ColorPicker } from "./ColorPicker";
+import { useTranslations } from 'next-intl';
 
 interface StrokeColorSidebarProps {
   editor: Editor | undefined;
@@ -16,7 +17,9 @@ const StrokeColorSidebar = ({
   activeTool,
   onChangeActiveTool,
 }: StrokeColorSidebarProps) => {
+  const t = useTranslations('Sidebar.strokeColor');
   const value = editor?.getActiveStrokeColor() || STROKE_COLOR;
+  
   const onClose = () => {
     onChangeActiveTool("select");
   };
@@ -33,8 +36,8 @@ const StrokeColorSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="stroke color"
-        description="Add stroke color to your element"
+        title={t('title')}
+        description={t('description')}
       />
       <ScrollArea>
         <div className="p-4 space-y-6">

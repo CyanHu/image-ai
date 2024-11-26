@@ -25,6 +25,7 @@ import {
   FaUnderline,
 } from "react-icons/fa6";
 import FontSizeInput from "./FontSizeInput";
+import { useTranslations } from 'next-intl';
 
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -33,6 +34,7 @@ interface ToolbarProps {
 }
 
 const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
+  const t = useTranslations('Toolbar');
   const initialFillColor = editor?.getActiveFillColor();
   const initialStrokeColor = editor?.getActiveStrokeColor();
   const initialFontFamily = editor?.getActiveFontFamily();
@@ -141,7 +143,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
     <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
       {!isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="color" side="bottom" sideOffset={5}>
+          <Hint label={t('fillColor')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("fill")}
               size="icon"
@@ -160,7 +162,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="stroke color" side="bottom" sideOffset={5}>
+          <Hint label={t('strokeColor')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-color")}
               size="icon"
@@ -180,7 +182,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="stroke width" side="bottom" sideOffset={5}>
+          <Hint label={t('strokeWidth')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-width")}
               size="icon"
@@ -194,7 +196,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="font family" side="bottom" sideOffset={5}>
+          <Hint label={t('font')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("font")}
               size="icon"
@@ -215,7 +217,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="bold" side="bottom" sideOffset={5}>
+          <Hint label={t('bold')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => toggleBold()}
               size="icon"
@@ -229,7 +231,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Italic" side="bottom" sideOffset={5}>
+          <Hint label={t('italic')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => toggleItalic()}
               size="icon"
@@ -243,7 +245,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="underline" side="bottom" sideOffset={5}>
+          <Hint label={t('underline')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => toggleUnderline()}
               size="icon"
@@ -258,7 +260,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="stroke" side="bottom" sideOffset={5}>
+          <Hint label={t('stroke')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => toggleLinethrough()}
               size="icon"
@@ -274,7 +276,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="align left" side="bottom" sideOffset={5}>
+          <Hint label={t('alignLeft')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("left")}
               size="icon"
@@ -288,7 +290,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="align center" side="bottom" sideOffset={5}>
+          <Hint label={t('alignCenter')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("center")}
               size="icon"
@@ -303,7 +305,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="align right" side="bottom" sideOffset={5}>
+          <Hint label={t('alignRight')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("right")}
               size="icon"
@@ -326,7 +328,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
 
       {isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Filters" side="bottom" sideOffset={5}>
+          <Hint label={t('filter')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("filter")}
               size="icon"
@@ -340,7 +342,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
       {isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Remove background" side="bottom" sideOffset={5}>
+          <Hint label={t('removeBg')} side="bottom" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("remove-bg")}
               size="icon"
@@ -354,7 +356,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
       )}
 
       <div className="flex items-center h-full justify-center">
-        <Hint label="bring forward" side="bottom" sideOffset={5}>
+        <Hint label={t('bringForward')} side="bottom" sideOffset={5}>
           <Button
             onClick={() => editor?.bringForward()}
             size="icon"
@@ -365,7 +367,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="send backwords" side="bottom" sideOffset={5}>
+        <Hint label={t('sendBackwords')} side="bottom" sideOffset={5}>
           <Button
             onClick={() => editor?.sendBackwards()}
             size="icon"
@@ -376,7 +378,7 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="opacity" side="bottom" sideOffset={5}>
+        <Hint label={t('opacity')} side="bottom" sideOffset={5}>
           <Button
             onClick={() => onChangeActiveTool("opacity")}
             size="icon"
@@ -388,14 +390,14 @@ const Toolbar = ({ editor, activeTool, onChangeActiveTool }: ToolbarProps) => {
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="delete" side="bottom" sideOffset={5}>
+        <Hint label={t('delete')} side="bottom" sideOffset={5}>
           <Button onClick={editor?.delete} size="icon" variant="ghost">
             <Trash className="size-4" />
           </Button>
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Duplicate" side="bottom" sideOffset={5}>
+        <Hint label={t('duplicate')} side="bottom" sideOffset={5}>
           <Button
             onClick={() => {
               editor?.onCopy();

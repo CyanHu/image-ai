@@ -21,8 +21,10 @@ import AISidebar from "./AISidebar";
 import RemoveBGSidebar from "./RemoveBgSidebar";
 import DrawSidebar from "./DrawSidebar";
 import SettingsSidebar from "./SettingsSidebar";
+import { useTranslations } from 'next-intl';
 
 function Editor() {
+  const t = useTranslations('Editor');
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
 
   const onClearSelection = React.useCallback(() => {
@@ -157,7 +159,7 @@ function Editor() {
             className="flex-1 h-[calc(100%-124px)] bg-muted"
             ref={containerRef}
           >
-            <canvas ref={canvasRef} />
+            <canvas ref={canvasRef} aria-label={t('canvas')} />
           </div>
           <Footer editor={editor} />
         </main>

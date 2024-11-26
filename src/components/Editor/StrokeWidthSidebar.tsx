@@ -13,6 +13,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Label } from "../ui/label";
 import { Slider } from "../ui/slider";
 import { Button } from "../ui/button";
+import { useTranslations } from 'next-intl';
 
 interface StrokeWidthSidebarProps {
   editor: Editor | undefined;
@@ -25,6 +26,7 @@ const StrokeWidthSidebar = ({
   activeTool,
   onChangeActiveTool,
 }: StrokeWidthSidebarProps) => {
+  const t = useTranslations('Sidebar.strokeWidth');
   const widthValue = editor?.getActiveStrokeWidth() || STROKE_WIDTH;
   const typeValue = editor?.getActiveStrokeDashArray() || STROKE_DASH_ARRAY;
   const onClose = () => {
@@ -46,19 +48,19 @@ const StrokeWidthSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="stroke width"
-        description="modify the stroke of your element"
+        title={t('title')}
+        description={t('description')}
       />
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">
-          <Label className="text-sm">Stroke width</Label>
+          <Label className="text-sm">{t('width')}</Label>
           <Slider
             value={[widthValue]}
             onValueChange={(values) => onChangeStrokeWidth(values[0])}
           />
         </div>
         <div className="p-4 space-y-4 border-b">
-          <Label className="text-sm">Stroke type</Label>
+          <Label className="text-sm">{t('type')}</Label>
           <Button
             onClick={() => onChangeStrokeType([])}
             variant="secondary"
@@ -76,8 +78,7 @@ const StrokeWidthSidebar = ({
             size="lg"
             className={cn(
               "w-full h-16 justify-start text-left py-2 px-4",
-              JSON.stringify(typeValue) === `[5,5]` &&
-                "border-2 border-blue-500"
+              JSON.stringify(typeValue) === `[5,5]` && "border-2 border-blue-500"
             )}
           >
             <div className="w-full border-black rounded-full border-4 border-dashed"></div>

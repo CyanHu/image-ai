@@ -34,6 +34,38 @@
       "height": "Height",
       "width": "Width",
       "resizeButton": "Resize"
+    },
+    "fillColor": {
+      "title": "Fill Color",
+      "description": "Add fill color to your element"
+    },
+    "filter": {
+      "title": "Filters",
+      "description": "Apply filters to your image",
+      "filters": {
+        "greyscale": "Greyscale",
+        "sepia": "Sepia",
+        "blur": "Blur",
+        "brightness": "Brightness",
+        "contrast": "Contrast"
+      }
+    },
+    "strokeColor": {
+      "title": "Stroke Color",
+      "description": "Add stroke color to your element"
+    },
+    "strokeWidth": {
+      "title": "Stroke Width",
+      "description": "Modify the stroke of your element",
+      "width": "Stroke width",
+      "type": "Stroke type"
+    },
+    "removeBg": {
+      "title": "Background Removal",
+      "description": "Remove background from image using AI",
+      "notAvailable": "Feature not available for this object",
+      "imageAlt": "Preview image",
+      "removeButton": "Remove background"
     }
   },
   "SidebarLabel": {
@@ -79,5 +111,72 @@
   },
   "Logo": {
     "alt": "AI Draw"
+  },
+  "Navbar": {
+    "file": "File",
+    "open": "Open",
+    "openDescription": "Open a JSON file",
+    "export": "Export",
+    "saved": "Saved",
+    "undo": "Undo",
+    "redo": "Redo",
+    "select": "Select",
+    "exportFormats": {
+      "json": {
+        "title": "JSON",
+        "description": "Save for later editing"
+      },
+      "png": {
+        "title": "PNG",
+        "description": "Best for sharing on the web"
+      },
+      "jpg": {
+        "title": "JPG",
+        "description": "Best for printing"
+      },
+      "svg": {
+        "title": "SVG",
+        "description": "Best for editing in vector software"
+      }
+    }
+  },
+  "Common": {
+    "close": "Close"
+  },
+  "Footer": {
+    "reset": "Reset",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out"
+  },
+  "ColorPicker": {
+    "hex": "HEX",
+    "rgb": "RGB",
+    "hsl": "HSL",
+    "alpha": "Alpha"
+  },
+  "Editor": {
+    "canvas": "Canvas",
+    "loading": "Loading...",
+    "error": "Error loading"
+  },
+  "Toolbar": {
+    "font": "Font",
+    "bold": "Bold",
+    "italic": "Italic",
+    "underline": "Underline",
+    "stroke": "Strikethrough",
+    "alignLeft": "Align Left",
+    "alignCenter": "Align Center",
+    "alignRight": "Align Right",
+    "fillColor": "Fill Color",
+    "strokeColor": "Stroke Color",
+    "strokeWidth": "Stroke Width",
+    "opacity": "Opacity",
+    "filter": "Filters",
+    "removeBg": "Remove Background",
+    "bringForward": "Bring Forward",
+    "sendBackwords": "Send Backwards",
+    "delete": "Delete",
+    "duplicate": "Duplicate"
   }
 }

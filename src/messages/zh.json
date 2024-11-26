@@ -34,6 +34,38 @@
       "height": "高度",
       "width": "宽度",
       "resizeButton": "设置"
+    },
+    "fillColor": {
+      "title": "填充颜色",
+      "description": "为元素添加填充颜色"
+    },
+    "filter": {
+      "title": "滤镜",
+      "description": "为图片添加滤镜效果",
+      "filters": {
+        "greyscale": "灰度",
+        "sepia": "复古",
+        "blur": "模糊",
+        "brightness": "亮度",
+        "contrast": "对比度"
+      }
+    },
+    "strokeColor": {
+      "title": "描边颜色",
+      "description": "为元素添加描边颜色"
+    },
+    "strokeWidth": {
+      "title": "描边宽度",
+      "description": "修改元素的描边",
+      "width": "描边宽度",
+      "type": "描边类型"
+    },
+    "removeBg": {
+      "title": "移除背景",
+      "description": "使用AI移除图片背景",
+      "notAvailable": "此功能不适用于当前对象",
+      "imageAlt": "预览图片",
+      "removeButton": "移除背景"
     }
   },
   "SidebarLabel": {
@@ -79,5 +111,72 @@
   },
   "Logo": {
     "alt": "智画"
+  },
+  "Navbar": {
+    "file": "文件",
+    "open": "打开",
+    "openDescription": "打开 JSON 文件",
+    "export": "导出",
+    "saved": "已保存",
+    "undo": "撤销",
+    "redo": "重做",
+    "select": "选择",
+    "exportFormats": {
+      "json": {
+        "title": "JSON",
+        "description": "保存以供后续编辑"
+      },
+      "png": {
+        "title": "PNG",
+        "description": "适合网页分享"
+      },
+      "jpg": {
+        "title": "JPG",
+        "description": "适合打印"
+      },
+      "svg": {
+        "title": "SVG",
+        "description": "适合在矢量软件中编辑"
+      }
+    }
+  },
+  "Common": {
+    "close": "关闭"
+  },
+  "Footer": {
+    "reset": "重置",
+    "zoomIn": "放大",
+    "zoomOut": "缩小"
+  },
+  "ColorPicker": {
+    "hex": "十六进制",
+    "rgb": "RGB",
+    "hsl": "HSL",
+    "alpha": "透明度"
+  },
+  "Editor": {
+    "canvas": "画布",
+    "loading": "加载中...",
+    "error": "加载出错"
+  },
+  "Toolbar": {
+    "font": "字体",
+    "bold": "粗体",
+    "italic": "斜体",
+    "underline": "下划线",
+    "stroke": "删除线",
+    "alignLeft": "左对齐",
+    "alignCenter": "居中对齐",
+    "alignRight": "右对齐",
+    "fillColor": "填充颜色",
+    "strokeColor": "描边颜色",
+    "strokeWidth": "描边宽度",
+    "opacity": "透明度",
+    "filter": "滤镜",
+    "removeBg": "移除背景",
+    "bringForward": "上移一层",
+    "sendBackwords": "下移一层",
+    "delete": "删除",
+    "duplicate": "复制"
   }
 }

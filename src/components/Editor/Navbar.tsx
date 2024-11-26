@@ -20,6 +20,7 @@ import { BsCloudCheck } from "react-icons/bs";
 import { ActiveTool, Editor } from "./types";
 import { cn } from "@/lib/utils";
 import { useFilePicker } from "use-file-picker";
+import { useTranslations } from 'next-intl';
 
 interface NavbarProps {
   activeTool: ActiveTool;
@@ -28,6 +29,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
+  const t = useTranslations('Navbar');
   const { openFilePicker } = useFilePicker({
     accept: ".json",
     onFilesSuccessfullySelected: ({ plainFiles }: any) => {
@@ -48,7 +50,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button size="sm" variant="ghost">
-              File
+              {t('file')}
               <ChevronDown className="size-4 ml-2" />
             </Button>
           </DropdownMenuTrigger>
@@ -59,16 +61,16 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             >
               <CiFileOn className="size-8" />
               <div>
-                <p>Open</p>
+                <p>{t('open')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Open a JSON file
+                  {t('openDescription')}
                 </p>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
-        <Hint label="Select" side="bottom" sideOffset={10}>
+        <Hint label={t('select')} side="bottom" sideOffset={10}>
           <Button
             variant="ghost"
             size="icon"
@@ -78,7 +80,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             <MousePointerClick className="size-4" />
           </Button>
         </Hint>
-        <Hint label="Undo" side="bottom" sideOffset={10}>
+        <Hint label={t('undo')} side="bottom" sideOffset={10}>
           <Button
             variant="ghost"
             size="icon"
@@ -88,7 +90,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             <Undo2 className="size-4" />
           </Button>
         </Hint>
-        <Hint label="Redo" side="bottom" sideOffset={10}>
+        <Hint label={t('redo')} side="bottom" sideOffset={10}>
           <Button
             variant="ghost"
             size="icon"
@@ -101,14 +103,14 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
         <Separator orientation="vertical" className="mx-2" />
         <div className="flex items-center gap-x-2">
           <BsCloudCheck className="size-[20px] text-muted-foreground" />
-          <div className="text-xs text-muted-foreground">Saved</div>
+          <div className="text-xs text-muted-foreground">{t('saved')}</div>
         </div>
       </div>
       <div className="ml-auto flex items-center gap-x-4">
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button size="sm" variant="ghost">
-              Export
+              {t('export')}
               <Download className="size-4 ml-2" />
             </Button>
           </DropdownMenuTrigger>
@@ -119,9 +121,9 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             >
               <CiFileOn className="size-8" />
               <div>
-                <p>JSON</p>
+                <p>{t('exportFormats.json.title')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Save for later editing
+                  {t('exportFormats.json.description')}
                 </p>
               </div>
             </DropdownMenuItem>
@@ -131,9 +133,9 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             >
               <CiFileOn className="size-8" />
               <div>
-                <p>PNG</p>
+                <p>{t('exportFormats.png.title')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Best for sharing on the web
+                  {t('exportFormats.png.description')}
                 </p>
               </div>
             </DropdownMenuItem>
@@ -143,9 +145,9 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             >
               <CiFileOn className="size-8" />
               <div>
-                <p>JPG</p>
+                <p>{t('exportFormats.jpg.title')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Best for printing
+                  {t('exportFormats.jpg.description')}
                 </p>
               </div>
             </DropdownMenuItem>
@@ -155,9 +157,9 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
             >
               <CiFileOn className="size-8" />
               <div>
-                <p>SVG</p>
+                <p>{t('exportFormats.svg.title')}</p>
                 <p className="text-xs text-muted-foreground">
-                  Best for editing in vector software
+                  {t('exportFormats.svg.description')}
                 </p>
               </div>
             </DropdownMenuItem>

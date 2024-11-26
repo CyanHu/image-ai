@@ -4,6 +4,7 @@ import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { ColorPicker } from "./ColorPicker";
+import { useTranslations } from 'next-intl';
 
 interface FillColorSidebarProps {
   editor: Editor | undefined;
@@ -16,6 +17,7 @@ const FillColorSidebar = ({
   activeTool,
   onChangeActiveTool,
 }: FillColorSidebarProps) => {
+  const t = useTranslations('Sidebar.fillColor');
   const value = editor?.getActiveFillColor() || FILL_COLOR;
   const onClose = () => {
     onChangeActiveTool("select");
@@ -33,8 +35,8 @@ const FillColorSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="fill color"
-        description="Add fill color to your element"
+        title={t('title')}
+        description={t('description')}
       />
       <ScrollArea>
         <div className="p-4 space-y-6">

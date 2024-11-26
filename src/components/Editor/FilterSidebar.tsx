@@ -4,6 +4,7 @@ import ToolSidebarHeader from "./ToolSidebarHeader";
 import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
+import { useTranslations } from 'next-intl';
 
 interface FilterSidebarProps {
   editor: Editor | undefined;
@@ -16,7 +17,9 @@ const FilterSidebar = ({
   activeTool,
   onChangeActiveTool,
 }: FilterSidebarProps) => {
+  const t = useTranslations('Sidebar.filter');
   const value = null;
+  
   const onClose = () => {
     onChangeActiveTool("select");
   };
@@ -29,8 +32,8 @@ const FilterSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="Filters"
-        description="Apply a filter to selected image"
+        title={t('title')}
+        description={t('description')}
       />
       <ScrollArea>
         <div className="p-4 space-y-1 border-b">
@@ -45,7 +48,7 @@ const FilterSidebar = ({
               )}
               onClick={() => editor?.chnageImageFilter(filter)}
             >
-              {filter}
+              {t(`filters.${filter}`)}
             </Button>
           ))}
         </div>
