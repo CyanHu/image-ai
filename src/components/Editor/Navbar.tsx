@@ -14,6 +14,7 @@ import {
   MousePointerClick,
   Redo2,
   Undo2,
+  Languages,
 } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { BsCloudCheck } from "react-icons/bs";
@@ -21,14 +22,17 @@ import { ActiveTool, Editor } from "./types";
 import { cn } from "@/lib/utils";
 import { useFilePicker } from "use-file-picker";
 import { useTranslations } from 'next-intl';
+import { Link } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
 
 interface NavbarProps {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
   editor: Editor | undefined;
+  locale: string;
 }
 
-const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
+const Navbar = ({ activeTool, onChangeActiveTool, editor, locale }: NavbarProps) => {
   const t = useTranslations('Navbar');
   const { openFilePicker } = useFilePicker({
     accept: ".json",
@@ -43,6 +47,7 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
       }
     },
   });
+  const params = useParams();
   return (
     <nav className="h-[68px] flex items-center w-full border-b gap-x-8 lg:pl-[34px] p-4">
       <Logo />
@@ -107,6 +112,12 @@ const Navbar = ({ activeTool, onChangeActiveTool, editor }: NavbarProps) => {
         </div>
       </div>
       <div className="ml-auto flex items-center gap-x-4">
+        <Link href={`/editor/${params.projectId}`} locale={locale === 'zh' ? 'en' : 'zh'}>
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            {locale === 'zh' ? 'EN/中' : '中/EN'}
+            <Languages className="h-4 w-4 ml-2" />
+          </Button>
+        </Link>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button size="sm" variant="ghost">

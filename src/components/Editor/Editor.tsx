@@ -22,9 +22,12 @@ import RemoveBGSidebar from "./RemoveBgSidebar";
 import DrawSidebar from "./DrawSidebar";
 import SettingsSidebar from "./SettingsSidebar";
 import { useTranslations } from 'next-intl';
+import { useParams } from "next/navigation";
 
 function Editor() {
   const t = useTranslations('Editor');
+  const params = useParams();
+  const locale = params.locale as string;
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
 
   const onClearSelection = React.useCallback(() => {
@@ -77,6 +80,7 @@ function Editor() {
         activeTool={activeTool}
         onChangeActiveTool={onChangeActiveTool}
         editor={editor}
+        locale={locale}
       />
       <div className="absolute h-[calc(100%-68px)] w-full top-[68px] flex">
         <Sidebar
