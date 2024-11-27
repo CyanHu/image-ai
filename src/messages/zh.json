@@ -43,11 +43,29 @@
       "title": "滤镜",
       "description": "为图片添加滤镜效果",
       "filters": {
-        "greyscale": "灰度",
+        "none": "无",
+        "polaroid": "宝丽来",
         "sepia": "复古",
-        "blur": "模糊",
+        "kodachrome": "柯达彩色",
+        "contrast": "对比度",
         "brightness": "亮度",
-        "contrast": "对比度"
+        "greyscale": "灰度",
+        "brownie": "布朗尼",
+        "vintage": "老照片",
+        "technicolor": "特艺彩色",
+        "pixelate": "像素化",
+        "invert": "反相",
+        "blur": "模糊",
+        "sharpen": "锐化",
+        "emboss": "浮雕",
+        "removecolor": "去色",
+        "blacknwhite": "黑白",
+        "vibrance": "自然饱和度",
+        "blendcolor": "混合色彩",
+        "huerotate": "色相旋转",
+        "resize": "调整大小",
+        "saturation": "饱和度",
+        "gamma": "伽马值"
       }
     },
     "strokeColor": {

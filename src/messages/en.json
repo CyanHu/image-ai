@@ -43,11 +43,29 @@
       "title": "Filters",
       "description": "Apply filters to your image",
       "filters": {
-        "greyscale": "Greyscale",
+        "none": "None",
+        "polaroid": "Polaroid",
         "sepia": "Sepia",
-        "blur": "Blur",
+        "kodachrome": "Kodachrome",
+        "contrast": "Contrast",
         "brightness": "Brightness",
-        "contrast": "Contrast"
+        "greyscale": "Greyscale",
+        "brownie": "Brownie",
+        "vintage": "Vintage",
+        "technicolor": "Technicolor",
+        "pixelate": "Pixelate",
+        "invert": "Invert",
+        "blur": "Blur",
+        "sharpen": "Sharpen",
+        "emboss": "Emboss",
+        "removecolor": "Remove Color",
+        "blacknwhite": "Black & White",
+        "vibrance": "Vibrance",
+        "blendcolor": "Blend Color",
+        "huerotate": "Hue Rotate",
+        "resize": "Resize",
+        "saturation": "Saturation",
+        "gamma": "Gamma"
       }
     },
     "strokeColor": {
