@@ -31,6 +31,7 @@ import { useClipboard } from "./use-clipboard";
 import { useHistory } from "./use-history";
 import { useHotkeys } from "./use-hotkeys";
 import { useWindowEvents } from "./use-window-events";
+import { useLoadState } from "./use-load-state";
 
 const buildEditor = ({
   save,
@@ -565,7 +566,13 @@ const buildEditor = ({
   };
 };
 
-export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
+export const useEditor = ({  defaultState,
+  defaultHeight,
+  defaultWidth, clearSelectionCallback, saveCallback }: EditorHookProps) => {
+    const initialState = React.useRef(defaultState);
+    const initialWidth = React.useRef(defaultWidth);
+    const initialHeight = React.useRef(defaultHeight);
+
   const [canvas, setCanvas] = React.useState<fabric.Canvas | null>(null);
   const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = React.useState<fabric.Object[]>(
@@ -582,7 +589,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   useWindowEvents();
 
   const { save, canRedo, canUndo, undo, redo, canvasHistory, setHistoryIndex } =
-    useHistory({ canvas });
+    useHistory({ canvas, saveCallback });
   const { copy, paste } = useClipboard({ canvas });
   const { autoZoom } = useAutoResize({
     canvas,
@@ -604,6 +611,14 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     save,
     canvas,
   });
+  useLoadState({
+    canvas,
+    autoZoom,
+    initialState,
+    canvasHistory,
+    setHistoryIndex,
+  });
+
 
   const editor = React.useMemo(() => {
     if (canvas) {
@@ -669,8 +684,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       });
 
       const initialWorkspace = new fabric.Rect({
-        width: 900,
-        height: 1200,
+        width: initialWidth.current,
+        height: initialHeight.current,
         name: "clip",
         fill: "white",
         selectable: false,
@@ -681,8 +696,9 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         }),
       });
 
-      initialCanvas.setWidth(initialContainer.offsetHeight);
-      initialCanvas.setHeight(initialContainer.offsetWidth);
+      initialCanvas.setWidth(initialContainer.offsetWidth);
+      initialCanvas.setHeight(initialContainer.offsetHeight);
+
       initialCanvas.add(initialWorkspace);
       initialCanvas.centerObject(initialWorkspace);
       initialCanvas.clipPath = initialWorkspace;
@@ -690,11 +706,16 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       setCanvas(initialCanvas);
       setContainer(initialContainer);
 
-      const currentState = JSON.stringify(initialCanvas.toJSON(JSON_KEYS));
+      const currentState = JSON.stringify(
+        initialCanvas.toJSON(JSON_KEYS)
+      );
       canvasHistory.current = [currentState];
       setHistoryIndex(0);
     },
-    [canvasHistory, setHistoryIndex]
+    [
+      canvasHistory, // No need, this is from useRef
+      setHistoryIndex, // No need, this is from useState
+    ]
   );
   return { init, editor };
 };

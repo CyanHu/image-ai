@@ -23,11 +23,33 @@ import DrawSidebar from "./DrawSidebar";
 import SettingsSidebar from "./SettingsSidebar";
 import { useTranslations } from 'next-intl';
 import { useParams } from "next/navigation";
+import { useCallback } from "react";
+import debounce from "lodash.debounce";
 
-function Editor() {
+interface EditorProps {
+  initialData: {
+    json: string;
+    width: number;
+    height: number;
+  } 
+}
+
+function Editor({ initialData }: EditorProps) {
   const t = useTranslations('Editor');
   const params = useParams();
   const locale = params.locale as string;
+
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSave = useCallback(
+    debounce((values: { json: string; height: number; width: number }) => {
+      console.log('saving canvas state', values);
+      localStorage.setItem('canvas_state', JSON.stringify(values));
+    }, 500),
+    []
+  );
+  
+
   const [activeTool, setActiveTool] = React.useState<ActiveTool>("select");
 
   const onClearSelection = React.useCallback(() => {
@@ -37,7 +59,11 @@ function Editor() {
   }, [activeTool]);
 
   const { init, editor } = useEditor({
+    defaultState: initialData.json,
+    defaultWidth: initialData.width,
+    defaultHeight: initialData.height,
     clearSelectionCallback: onClearSelection,
+    saveCallback: debouncedSave,
   });
 
   const onChangeActiveTool = React.useCallback(
@@ -72,7 +98,7 @@ function Editor() {
     return () => {
       canvas.dispose();
     };
-  }, [init]);
+  }, [init, initialData]);
 
   return (
     <div className="h-full flex flex-col">

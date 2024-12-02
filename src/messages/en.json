@@ -175,7 +175,8 @@
   "Editor": {
     "canvas": "Canvas",
     "loading": "Loading...",
-    "error": "Error loading"
+    "error": "Error loading canvas",
+    "backToHome": "Back to Home"
   },
   "Toolbar": {
     "font": "Font",

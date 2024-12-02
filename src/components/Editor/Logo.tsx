@@ -9,6 +9,7 @@ const Logo = () => {
     <Link href="/">
       <div className="size-8 relative shrink-0">
         <Image
+          priority
           className="shrink-0 hover:opacity-75 transition"
           src="/logo.svg"
           fill

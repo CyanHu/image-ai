@@ -175,7 +175,8 @@
   "Editor": {
     "canvas": "画布",
     "loading": "加载中...",
-    "error": "加载出错"
+    "error": "加载出错",
+    "backToHome": "返回首页"
   },
   "Toolbar": {
     "font": "字体",
