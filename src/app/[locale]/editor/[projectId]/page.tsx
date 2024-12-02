@@ -14,6 +14,12 @@ interface CanvasState {
   height: number;
 }
 
+const DEFAULT_CANVAS_STATE: CanvasState = {
+  json: "",
+  width: 900,
+  height: 1200,
+};
+
 const EditorProjectIdPage = () => {
   const t = useTranslations('Editor');
   const params = useParams();
@@ -32,7 +38,7 @@ const EditorProjectIdPage = () => {
     try {
       const data = localStorage.getItem('canvas_state');
       setState({
-        data: data ? JSON.parse(data) : null,
+        data: data ? JSON.parse(data) : DEFAULT_CANVAS_STATE,
         isLoading: false,
         isError: false,
       });
