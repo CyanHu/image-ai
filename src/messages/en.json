@@ -84,6 +84,10 @@
       "notAvailable": "Feature not available for this object",
       "imageAlt": "Preview image",
       "removeButton": "Remove background"
+    },
+    "opacity": {
+      "title": "Opacity",
+      "description": "change the opacity of the selected object"
     }
   },
   "SidebarLabel": {
@@ -97,8 +101,8 @@
   },
   "Index": {
     "title": "AI Draw",
-    "subtitle": "Intelligent Graphic Design",
-    "description": "A modern graphic editor with AI generation, supporting multi-format creation, professional layout and team collaboration",
+    "subtitle": "AI Draw",
+    "description": "A modern graphic editor with AI generation",
     "startCreating": "Start Creating",
     "aiDesign": {
       "title": "AI Enhanced Design",

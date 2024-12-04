@@ -5,6 +5,7 @@ import ToolSidebarClose from "./ToolSidebarClose";
 import { ScrollArea } from "../ui/scroll-area";
 import { Slider } from "../ui/slider";
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 interface OpacitySidebarProps {
   editor: Editor | undefined;
@@ -20,6 +21,7 @@ const OpacitySidebar = ({
   const initialValue = editor?.getActiveOpacity() || 1;
 
   const [opacity, setOpacity] = React.useState(initialValue);
+  const t = useTranslations("Sidebar.opacity");
 
   React.useEffect(() => {
     if (editor?.selectedObjects) {
@@ -43,10 +45,7 @@ const OpacitySidebar = ({
         activeTool === "opacity" ? "visible" : "hidden"
       )}
     >
-      <ToolSidebarHeader
-        title="Opacity"
-        description="change the opacity of the selected object"
-      />
+      <ToolSidebarHeader title={t("title")} description={t("description")} />
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">
           <Slider

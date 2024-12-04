@@ -84,6 +84,10 @@
       "notAvailable": "此功能不适用于当前对象",
       "imageAlt": "预览图片",
       "removeButton": "移除背景"
+    },
+    "opacity": {
+      "title": "透明度",
+      "description": "改变选中元素的透明度"
     }
   },
   "SidebarLabel": {
@@ -97,8 +101,8 @@
   },
   "Index": {
     "title": "智画",
-    "subtitle": "智能图形设计",
-    "description": "集成AI智能生成的现代化图形编辑器，支持多格式创作、专业级排版与团队协作",
+    "subtitle": "智画",
+    "description": "集成AI智能生成的现代化图形编辑器",
     "startCreating": "开始创作",
     "aiDesign": {
       "title": "AI增强设计",

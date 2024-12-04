@@ -42,8 +42,10 @@ export default function Home({
                 {locale === 'zh' ? 'EN/中' : '中/EN'}
               </Button>
             </Link>
-            <Button variant="ghost" className="text-white hover:bg-white/10">
-              GitHub
+            <Button variant="ghost" className="text-white hover:bg-white/10" asChild>
+              <a href="https://github.com/CyanHu/image-ai" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
             </Button>
           </div>
         </div>
